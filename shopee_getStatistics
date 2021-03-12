@@ -63,13 +63,13 @@ function getStatistics() {
 			else {
 				console.log("%cTổng đơn hàng đã giao: "+"%c"+moneyFormat(totalOrders), "font-size: 30px;","font-size: 30px; color:red");
                 console.log("%cTổng sản phẩm đã đặt: " + "%c" + moneyFormat(totalItems), "font-size: 30px;","font-size: 30px; color:red");
-				console.log("%cTổng chi tiêu: "+ moneyFormat(totalSpent)+"đ", "font-size: 30px; color:red");
-				console.log("%cTổng tiền ship: "+ moneyFormat(totalShippingSpent)+"đ","font-size: 30px; color:red");
+				console.log("%cTổng chi tiêu: " + "%c" + moneyFormat(totalSpent)+"đ", "font-size: 30px;","font-size: 30px; color:red");
+				console.log("%cTổng tiền ship: " + "%c" + moneyFormat(totalShippingSpent)+"đ","font-size: 30px;","font-size: 30px; color:red");
                 for(var i = 0; i< linkProduct.length; i++){
-                    console.log("%cSản phẩm đắt tiền nhất: ","font-size: 30px; color:red");
-                    console.log("Tên: "+nameProduct[i]," color:red");
-                    console.log( "Link: "+"%c"+linkProduct[i]," color:red");
-					console.log( "giá: "+"%c"+moneyFormat(pricePrd[i])," color:red");
+                    console.log("%cSản phẩm đắt tiền nhất: %c","font-size: 30px; color:red");
+                    console.log("%cTên: %c"+nameProduct[i]," color:white"," color:blue");
+                    console.log( "%cLink: %c"+linkProduct[i]," color:white"," color:red");
+					console.log( "%cgiá: "+"%c"+moneyFormat(pricePrd[i])+"đ"," color:white"," color:red");
                 }
 
 			}
