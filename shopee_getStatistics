@@ -33,19 +33,9 @@ function getStatistics() {
 				var price = [];
                 if(MaxPaid < (order["paid_amount"] / 100000) ){
                     MaxPaid = (order["paid_amount"] / 100000);
-                    let grouped_item = order["grouped_items"];
-                    if(Array.isArray(grouped_item))
-                        grouped_item.forEach(item => {
-                            prd.push( "https://shopee.vn/product/"+order["shopid"]+"/"+item[0]["itemid"]);
-                            name.push(item[0]["name"]);
-							price.push(item[0]["item_price"]);
-                        });
-                    else{
-                    
-                        prd.push( "https://shopee.vn/product/"+order["shopid"]+"/"+grouped_item[0][0]["itemid"]);
-                        name.push(grouped_item[0][0]["name"]);
-						price.push(grouped_item[0][0]["item_price"] / 100000);
-                    }
+                    let grouped_item = Object.values(order["grouped_items"]);
+
+                    breakObject(grouped_item, prd,name,price, order["shopid"]);
                        
    
                     linkProduct = prd;
@@ -77,6 +67,18 @@ function getStatistics() {
 	};
 	xhttp.open("GET", "https://shopee.vn/api/v1/orders/?order_type=3&offset=" + offset + "&limit=10", true);
 	xhttp.send();
+}
+
+function breakObject(obj, linkPrd, name, price, shopId){
+    for(item of obj){
+        if(!item["itemid"])
+            breakObject(item, linkPrd, name, price,shopId);
+        else{
+            linkPrd.push( "https://shopee.vn/product/"+shopId+"/"+item["itemid"]);
+            name.push(item["name"]);
+            price.push(item["item_price"]/1000);
+        }
+    }
 }
 
 function moneyFormat(number, fixed=0) {
